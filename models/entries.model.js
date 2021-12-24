@@ -24,6 +24,10 @@ const entriesSchema = new mongoose.Schema({
     lexicalDiversity: Number,
     averageWordLength: Number,
     averageSentenceLength: Number,
+    nounRate: Number,
+    verbRate: Number,
+    conjunctionRate: Number,
+    adjectiveRate: Number,
 });
 
 const Entry = mongoose.model("Entry", entriesSchema);

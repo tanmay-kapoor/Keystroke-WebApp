@@ -1,19 +1,24 @@
-// const natural = require("natural");
+const natural = require("natural");
 
 // const wordTokenizer = new natural.WordTokenizer();
 // const sentenceTokenizer = new natural.SentenceTokenizer();
 
-// const language = "EN";
-// const defaultCategory = "NN";
-// const defaultCategoryCapitalized = "NNP";
+const language = "EN";
+const defaultCategory = "NN";
+const defaultCategoryCapitalized = "NNP";
 
-// const lexicon = new natural.Lexicon(
-//     language,
-//     defaultCategory,
-//     defaultCategoryCapitalized
-// );
-// const ruleSet = new natural.RuleSet("EN");
-// const tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+const lexicon = new natural.Lexicon(
+    language,
+    defaultCategory,
+    defaultCategoryCapitalized
+);
+const ruleSet = new natural.RuleSet("EN");
+const tagger = new natural.BrillPOSTagger(lexicon, ruleSet);
+
+const nounTags = ["NN", "NNP", "NNPS", "NNS"];
+const verbTags = ["VB", "VBD", "VBG", "VBN", "VBP", "VBZ"];
+const conjunctionTags = ["CC"];
+const adjectiveTags = ["JJ", "JJR", "JJS"];
 
 let text,
     keystrokes,
@@ -84,21 +89,25 @@ function keystrokeFeatures() {
 
 function wordFeatures() {
     // words = wordTokenizer.tokenize(text);
-    words = text.split(/\s+/g); // separate out words in text
+    words = text.split(/[\s.?!,:;]+/g); // separate out words in text
+
     uniqueWords = new Set(words); // get unique words
 
-    // taggedWords = tagger.tag(words).taggedWords;
+    taggedWords = tagger.tag(words).taggedWords;
 
     return {
         lexicalDiversity: uniqueWords.size / words.length,
         averageWordLength: totalKeystrokes / words.length,
-        // nounRate: getNounCount() / words.length,
+        nounRate: getRateFromTags(nounTags),
+        verbRate: getRateFromTags(verbTags),
+        conjunctionRate: getRateFromTags(conjunctionTags),
+        adjectiveRate: getRateFromTags(adjectiveTags),
     };
 }
 
 function sentenceFeatures() {
-    sentences = text.split(/[.?!\n]/g);
     // sentences = sentenceTokenizer.tokenize(text);
+    sentences = text.split(/[.?!\n]+/g);
 
     return {
         averageSentenceLength: words.length / sentences.length,
@@ -109,13 +118,15 @@ function getKeystrokeCount(key) {
     return keystrokes[key] || 0;
 }
 
-// function getNounCount() {
-//     const nounTags = ["NN", "NNP", "NNPS", "NNS"];
+function getRateFromTags(tags) {
+    return getCount(tags) / words.length;
+}
 
-//     const nouns = taggedWords.filter((taggedWord) =>
-//         nounTags.includes(taggedWord.tag)
-//     );
-//     return nouns.length;
-// }
+function getCount(tags) {
+    const arr = taggedWords.filter((taggedWord) =>
+        tags.includes(taggedWord.tag)
+    );
+    return arr.length;
+}
 
 module.exports = getAllFeatures;
