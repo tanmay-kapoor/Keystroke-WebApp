@@ -28,6 +28,11 @@ const entriesSchema = new mongoose.Schema({
     verbRate: Number,
     conjunctionRate: Number,
     adjectiveRate: Number,
+    adverbRate: Number,
+    modifierRate: Number,
+    emotiveWordRate: Number,
+    positiveWordRate: Number,
+    negativeWordRate: Number,
 });
 
 const Entry = mongoose.model("Entry", entriesSchema);

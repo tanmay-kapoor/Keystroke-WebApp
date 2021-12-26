@@ -1,4 +1,6 @@
 const natural = require("natural");
+const Sentiment = require("sentiment");
+const sentiment = new Sentiment();
 
 // const wordTokenizer = new natural.WordTokenizer();
 // const sentenceTokenizer = new natural.SentenceTokenizer();
@@ -19,6 +21,7 @@ const nounTags = ["NN", "NNP", "NNPS", "NNS"];
 const verbTags = ["VB", "VBD", "VBG", "VBN", "VBP", "VBZ"];
 const conjunctionTags = ["CC"];
 const adjectiveTags = ["JJ", "JJR", "JJS"];
+const adverbTags = ["RB", "RBR", "RBS", "WRB"];
 
 let text,
     keystrokes,
@@ -95,13 +98,25 @@ function wordFeatures() {
 
     taggedWords = tagger.tag(words).taggedWords;
 
+    const result = sentiment.analyze(text); // count positive and negative words in the text
+
+    const adjectiveRate = getRateFromTags(adjectiveTags);
+    const adverbRate = getRateFromTags(adverbTags);
+
     return {
         lexicalDiversity: uniqueWords.size / words.length,
         averageWordLength: totalKeystrokes / words.length,
         nounRate: getRateFromTags(nounTags),
         verbRate: getRateFromTags(verbTags),
         conjunctionRate: getRateFromTags(conjunctionTags),
-        adjectiveRate: getRateFromTags(adjectiveTags),
+        adjectiveRate,
+        adverbRate,
+        modifierRate: adjectiveRate + adverbRate,
+        emotiveWordRate:
+            (getCount(adjectiveTags) + getCount(adverbTags)) /
+            (getCount(nounTags) + getCount(verbTags)),
+        positiveWordRate: result.positive.length / words.length,
+        negativeWordRate: result.negative.length / words.length,
     };
 }
 
