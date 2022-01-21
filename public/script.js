@@ -57,9 +57,6 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
                 totalPauseTime,
                 totalPauses,
             })
-            .then(() => {
-                alert("wassup");
-            })
             .catch((err) => console.log(err));
     }
 });
