@@ -15,8 +15,8 @@ mongoose.connect("mongodb://localhost:27017/keystrokeDB", {
     useUnifiedTopology: true,
 });
 
-const baselineRoutes = require("./routes/baseline.routes.js");
+const routes = require("./routes/routes.js");
 
-app.use("/baseline", baselineRoutes);
+app.use("/", routes);
 
 app.listen("3000", () => console.log("Server started on port 3000"));

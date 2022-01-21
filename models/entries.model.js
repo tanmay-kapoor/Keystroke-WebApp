@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const entriesSchema = new mongoose.Schema({
+    username: String,
     totalInputTime: Number,
     timePerKeystroke: Number,
     adjustedTimePerKeystroke: Number,

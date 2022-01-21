@@ -41,6 +41,7 @@ function getAllFeatures(body) {
     totalPauses = body.totalPauses;
 
     return {
+        username: body.username,
         ...timingFeatures(),
         ...keystrokeFeatures(),
         ...wordFeatures(),

@@ -48,13 +48,17 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
     } else {
         const totalInputTime = submitPressedTime - (wastedTime + startTime);
         axios
-            .post("/baseline", {
+            .post("/", {
+                username: document.getElementsByName("username")[0].value,
                 text,
                 keystrokes,
                 totalInputTime,
                 totalKeystrokes,
                 totalPauseTime,
                 totalPauses,
+            })
+            .then(() => {
+                alert("wassup");
             })
             .catch((err) => console.log(err));
     }
