@@ -1,8 +1,5 @@
-const loginChecker = require("../services/loginChecker.service");
 const express = require("express");
 const router = express.Router();
-
-let loggedIn = false;
 
 const {
     getLoginPage,
@@ -13,6 +10,10 @@ const {
     postData,
 } = require("../controllers/controller.js");
 
+router.get("/", verifyToken, getTypingPage);
+
+router.post("/", verifyToken, postData);
+
 router.get("/login", getLoginPage);
 
 router.post("/login", authenticateUser);
@@ -21,15 +22,11 @@ router.get("/signup", getSignupPage);
 
 router.post("/signup", addUser);
 
-router.get("/", checkLoggedIn, getTypingPage);
-
-router.post("/", checkLoggedIn, postData);
-
-function checkLoggedIn(req, res, next) {
-    if (loginChecker.checkLoggedIn()) {
-        return next();
+function verifyToken(req, res, next) {
+    if (req.query.token) {
+        next();
     } else {
-        return res.redirect("/login");
+        res.redirect("/login");
     }
 }
 

@@ -10,6 +10,19 @@ let startTime,
     totalPauses = 0,
     wastedTime = 0;
 
+let token = localStorage.getItem("token");
+
+if (!token) {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    token = params.token;
+    localStorage.setItem("token", token);
+}
+
+document.getElementById("logout").addEventListener("click", function (e) {
+    localStorage.removeItem("token");
+});
+
 document.getElementById("text").addEventListener("keydown", function (e) {
     const key = e.key.toLowerCase();
 
@@ -47,8 +60,9 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
         wastedTime += Date.now() - submitPressedTime; // adding to the time spent in reading alert
     } else {
         const totalInputTime = submitPressedTime - (wastedTime + startTime);
+
         axios
-            .post("/", {
+            .post(`/?token=${token}`, {
                 username: document.getElementsByName("username")[0].value,
                 text,
                 keystrokes,

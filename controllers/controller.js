@@ -1,7 +1,7 @@
-const loginChecker = require("../services/loginChecker.service");
 const userService = require("../services/users.service");
 const entryService = require("../services/entries.service");
 
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
 
@@ -17,18 +17,21 @@ const authenticateUser = async (req, res) => {
     try {
         const user = await userService.findOne({ username: req.body.username });
         if (!user) {
-            // res.status(401).json({ message: "Username does not exist" });
             message = "Username does not exist";
             res.redirect("/");
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 username = req.body.username;
-                loginChecker.setLoggedIn(true);
-                res.redirect("/");
+                jwt.sign(
+                    { username },
+                    "secretkey",
+                    { expiresIn: "7 days" },
+                    (err, token) => {
+                        const encodedToken = encodeURIComponent(token);
+                        res.redirect(`/?token=${encodedToken}`);
+                    }
+                );
             } else {
-                // return res
-                //     .status(403)
-                //     .json({ message: "Invalid username/password" });
                 message = "Invalid username/password";
                 res.redirect("/");
             }
@@ -49,9 +52,6 @@ const addUser = async (req, res) => {
             username: req.body.username,
         });
         if (existingUser) {
-            // res.status(401).json({
-            //     message: "Account with this username already exists",
-            // });
             message = "Account with this username already exists";
             res.redirect("/signup");
         } else {
@@ -68,7 +68,13 @@ const addUser = async (req, res) => {
 };
 
 const getTypingPage = async (req, res) => {
-    res.render("index", { username });
+    jwt.verify(req.query.token, "secretkey", (err, authData) => {
+        if (!err) {
+            res.render("index", { username });
+        } else {
+            res.redirect("/login");
+        }
+    });
 };
 
 const postData = async (req, res) => {
