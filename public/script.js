@@ -63,7 +63,6 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
 
         axios
             .post(`/?token=${token}`, {
-                username: document.getElementsByName("username")[0].value,
                 text,
                 keystrokes,
                 totalInputTime,

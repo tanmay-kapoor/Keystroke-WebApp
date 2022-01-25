@@ -1,7 +1,11 @@
 const User = require("../models/users.model.js");
 
-const findOne = async ({ username }) => {
+const findByUsername = async (username) => {
     return await User.findOne({ username });
+};
+
+const findById = async (userid) => {
+    return await User.findById(userid);
 };
 
 const addUser = async (newUser) => {
@@ -9,4 +13,4 @@ const addUser = async (newUser) => {
     await user.save();
 };
 
-module.exports = { findOne, addUser };
+module.exports = { findByUsername, findById, addUser };
