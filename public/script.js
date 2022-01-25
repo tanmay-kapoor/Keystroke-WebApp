@@ -70,6 +70,10 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
                 totalPauseTime,
                 totalPauses,
             })
+            .then((res) => {
+                alert("Data recorded!");
+                window.location = "/";
+            })
             .catch((err) => console.log(err));
     }
 });

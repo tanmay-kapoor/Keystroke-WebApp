@@ -77,7 +77,9 @@ const postData = async (req, res) => {
     try {
         const userid = new ObjectId(jwt_decode(req.query.token).sub);
         const username = (await userService.findById(userid)).username;
-        return await entryService.addEntry({ username, ...req.body });
+        const data = { username, ...req.body };
+        await entryService.addEntry(data);
+        res.status(200).json({ data });
     } catch (err) {
         throw err;
     }
