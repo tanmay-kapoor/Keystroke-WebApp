@@ -1,26 +1,26 @@
-const userService = require("../services/users.service");
-const entryService = require("../services/entries.service");
-const ObjectId = require("mongoose").Types.ObjectId;
-const jwt_decode = require("jwt-decode");
-
 const jwt = require("jsonwebtoken");
+const jwt_decode = require("jwt-decode");
 const bcrypt = require("bcryptjs");
 const saltRounds = 10;
+const ObjectId = require("mongoose").Types.ObjectId;
 
-let clearStorage = false,
-    message;
+const userService = require("../services/users.service");
+const entryService = require("../services/entries.service");
+const webLocalStorage = require("../helpers/clearStorage");
+const message = require("../helpers/message");
 
 const getLoginPage = (req, res) => {
-    res.render("login", { clearStorage, message });
-    clearStorage = false;
-    message = "";
+    res.render("login", {
+        clearStorage: webLocalStorage.getClearStorage(),
+        message: message.getMessage(),
+    });
 };
 
 const authenticateUser = async (req, res) => {
     try {
         const user = await userService.findByUsername(req.body.username);
         if (!user) {
-            message = "Username does not exist";
+            message.setMessage("Username does not exist");
             res.redirect("/");
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
@@ -34,7 +34,7 @@ const authenticateUser = async (req, res) => {
                     }
                 );
             } else {
-                message = "Invalid username/password";
+                message.setMessage("Invalid username/password");
                 res.redirect("/");
             }
         }
@@ -44,8 +44,7 @@ const authenticateUser = async (req, res) => {
 };
 
 const getSignupPage = (req, res) => {
-    res.render("signup", { message });
-    message = "";
+    res.render("signup", { message: message.getMessage() });
 };
 
 const addUser = async (req, res) => {
@@ -54,7 +53,7 @@ const addUser = async (req, res) => {
             req.body.username
         );
         if (existingUser) {
-            message = "Account with this username already exists";
+            message.setMessage("Account with this username already exists");
             res.redirect("/signup");
         } else {
             const newUser = {
@@ -62,6 +61,7 @@ const addUser = async (req, res) => {
                 password: bcrypt.hashSync(req.body.password, saltRounds),
             };
             await userService.addUser(newUser);
+            message.setMessage("Account created!");
             res.redirect("/login");
         }
     } catch (err) {
@@ -70,19 +70,7 @@ const addUser = async (req, res) => {
 };
 
 const getTypingPage = async (req, res) => {
-    try {
-        const decoded = jwt.verify(req.query.token, "secretkey");
-        const userid = new ObjectId(decoded.sub);
-        const user = await userService.findById(userid);
-        if (!user) {
-            clearStorage = true;
-            res.redirect("/login");
-        } else {
-            res.render("index");
-        }
-    } catch (err) {
-        res.redirect("/login");
-    }
+    res.render("index");
 };
 
 const postData = async (req, res) => {

@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { verifyToken } = require("../helpers/middlewares");
 
 const {
     getLoginPage,
@@ -21,13 +22,5 @@ router.post("/login", authenticateUser);
 router.get("/signup", getSignupPage);
 
 router.post("/signup", addUser);
-
-function verifyToken(req, res, next) {
-    if (req.query.token) {
-        next();
-    } else {
-        res.redirect("/login");
-    }
-}
 
 module.exports = router;
