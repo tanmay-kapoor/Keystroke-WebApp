@@ -49,6 +49,18 @@ document.getElementById("text").addEventListener("keydown", function (e) {
     prevKeyTime = Date.now();
 });
 
+const slider = document.getElementById("stressLevel");
+const rangeValues = {
+    0: "Stress Level: 0",
+    1: "Stress Level: 1",
+    2: "Stress Level: 2",
+    3: "Stress Level: 3",
+};
+
+slider.addEventListener("change", (e) => {
+    document.getElementById("rangeText").innerText = rangeValues[slider.value];
+});
+
 document.getElementById("submitButton").addEventListener("click", (e) => {
     const submitPressedTime = Date.now(); // timestamp when alert is displayed
 
@@ -60,9 +72,11 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
         wastedTime += Date.now() - submitPressedTime; // adding to the time spent in reading alert
     } else {
         const totalInputTime = submitPressedTime - (wastedTime + startTime);
+        const stressLevel = Number(slider.value);
 
         axios
             .post(`/?token=${token}`, {
+                stressLevel,
                 text,
                 keystrokes,
                 totalInputTime,
@@ -70,7 +84,7 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
                 totalPauseTime,
                 totalPauses,
             })
-            .then((res) => {
+            .then(() => {
                 alert("Data recorded!");
                 window.location = "/";
             })

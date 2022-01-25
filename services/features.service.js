@@ -42,6 +42,7 @@ function getAllFeatures(body) {
 
     return {
         username: body.username,
+        stressLevel: body.stressLevel,
         ...timingFeatures(),
         ...keystrokeFeatures(),
         ...wordFeatures(),

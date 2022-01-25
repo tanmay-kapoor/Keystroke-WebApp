@@ -9,11 +9,24 @@
     </head>
     <body>
         <div>
-            <a href="/"><button id="logout">Logout</button></a>
+            <label for="" id="rangeText">Stress Level: 0</label>
+            <input
+                type="range"
+                min="0"
+                max="3"
+                value="0"
+                id="stressLevel"
+                name="stressLevel"
+            />
         </div>
+
         <div>
             <textarea rows="25" cols="150" id="text" name="text"></textarea>
             <button id="submitButton">Submit</button>
+        </div>
+
+        <div>
+            <a href="/"><button id="logout">Logout</button></a>
         </div>
     </body>
     <script src="script.js"></script>

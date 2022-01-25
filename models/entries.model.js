@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const entriesSchema = new mongoose.Schema({
     username: String,
+    stressLevel: Number,
     totalInputTime: Number,
     timePerKeystroke: Number,
     adjustedTimePerKeystroke: Number,
