@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Select Choice</title>
+    </head>
+    <body>
+        <div>
+            <a id="induce-stress"><button>Induce Stress</button></a>
+            <a id="type-data"><button>Type Data</button></a>
+        </div>
+
+        <div>
+            <a href="/"><button id="logout">Logout</button></a>
+        </div>
+    </body>
+
+    <script src="tokenAssigner.js"></script>
+    <script>
+        document
+            .getElementById("induce-stress")
+            .setAttribute("href", `/induce-stress?token=${token}`);
+        document
+            .getElementById("type-data")
+            .setAttribute("href", `/type-data?token=${token}`);
+    </script>
+
+    <%- include('partials/logout-footer') %>

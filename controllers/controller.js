@@ -69,8 +69,16 @@ const addUser = async (req, res) => {
     }
 };
 
-const getTypingPage = async (req, res) => {
-    res.render("index");
+const getChoicesPage = (req, res) => {
+    res.render("choices");
+};
+
+const getStressTaskPage = (req, res) => {
+    res.render("stress-task");
+};
+
+const getTypingPage = (req, res) => {
+    res.render("type-data");
 };
 
 const postData = async (req, res) => {
@@ -90,6 +98,8 @@ module.exports = {
     authenticateUser,
     getSignupPage,
     addUser,
+    getChoicesPage,
+    getStressTaskPage,
     getTypingPage,
     postData,
 };
