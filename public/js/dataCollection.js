@@ -61,21 +61,29 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
         const totalInputTime = submitPressedTime - (wastedTime + startTime);
         const stressLevel = Number(slider.value);
 
-        axios
-            .post(`/type-data?token=${token}`, {
-                stressLevel,
-                text,
-                keystrokes,
-                totalInputTime,
-                totalKeystrokes,
-                totalPauseTime,
-                totalPauses,
-            })
-            .then(() => {
-                alert("Data recorded!");
-                window.location = "/";
-            })
-            .catch((err) => console.log(err));
+        if (
+            !confirm(
+                "Is your Stress level correct?\n\nClick Cancel if you like to edit something."
+            )
+        ) {
+            wastedTime += Date.now() - submitPressedTime; // adding to the time spent in confirming stress level
+        } else {
+            axios
+                .post(`/type-data?token=${token}`, {
+                    stressLevel,
+                    text,
+                    keystrokes,
+                    totalInputTime,
+                    totalKeystrokes,
+                    totalPauseTime,
+                    totalPauses,
+                })
+                .then(() => {
+                    alert("Data recorded!");
+                    window.location = "/";
+                })
+                .catch((err) => console.log(err));
+        }
     }
 });
 
