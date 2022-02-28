@@ -1,3 +1,11 @@
+const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+    const token = localStorage.getItem("token");
+    window.location = `/induce-stress?task=stroop&token=${token}`;
+}
+
 const startDiv = document.getElementsByClassName("start-div")[0];
 let score = 0;
 let duration;
@@ -16,6 +24,7 @@ document.getElementById("start").addEventListener("click", (e) => {
     }
     startDiv.style.display = "none";
     document.getElementsByClassName("game-content")[0].style.display = "block";
+    document.getElementById("answer-text").innerText = "";
     gameContent.forEach((child) => (child.style.display = "block"));
 
     generateQuestion();

@@ -74,7 +74,11 @@ const getChoicesPage = (req, res) => {
 };
 
 const getStressTaskPage = (req, res) => {
-    res.render("stress-task");
+    if (req.query.task === "stroop") {
+        res.render("stroop-test");
+    } else {
+        res.render("arithmetic-task");
+    }
 };
 
 const getTypingPage = (req, res) => {
