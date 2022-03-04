@@ -5,49 +5,44 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/stressTask.css" />
+
         <title>Stress Task</title>
     </head>
     <body>
-        <div>
-            <h1>Stress Task</h1>
-        </div>
-        <div>
-            <h2>Instructions</h2>
-            <ul>
-                <li>
-                    As soon as you click start, a timer of
-                    <b>120 seconds</b> will appear.
-                </li>
-                <li>
-                    You have to perform mental arithmetic and select the correct
-                    option from the given 4 options.
-                </li>
-                <li>
-                    Get <b>75 questions right in 120 seconds</b> and then the
-                    task is complete.
-                </li>
-                <li>
-                    <b>Every wrong answer will deduct 10 seconds</b> from the
-                    timer thus making it difficult to complete the task.
-                </li>
-                <li>
-                    If you can get 75 questions right in 120 seconds, the task
-                    is completed successfully and you should feel relatively
-                    more stressed.
-                </li>
-                <li>
-                    <b>
-                        Feel free to do the task multiple times to induce more
-                        stress.
-                    </b>
-                </li>
-            </ul>
-        </div>
-        <div class="start-div">
-            <button id="start">Start Task</button>
-        </div>
-        <div class="game-content">
-            <div class="timer-div">
+        <section>
+            <div>
+                <h1>Stress Task</h1>
+                <h2>Instructions</h2>
+                <ul class="check-list">
+                    <li>As soon as you click start, a timer of
+                        <b>120 seconds</b> will appear.
+                    </li>
+                    <li>You have to perform mental arithmetic and select the correct
+                        option from the given 4 options.
+                    </li>
+                    <li>Get <b>75 questions right in 120 seconds</b> and then the
+                        task is complete.
+                    </li>
+                    <li><b>Every wrong answer will deduct 10 seconds</b> from the
+                        timer thus making it difficult to complete the task.
+                    </li>
+                    <li>If you can get 75 questions right in 120 seconds, the task
+                        is completed successfully and you should feel relatively
+                        more stressed.
+                    </li>
+                    <li>
+                        <b>Feel free to do the task multiple times to induce more stress.</b>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        
+        <div class="quiz-box">
+            <div class="start-div">
+                <button id="start" class="button-67" role="button">Start Task</button>
+            </div>
+            <div class="game-content">
+                <div class="timer-div">
                 <h2 id="timer"></h2>
             </div>
             <div class="score-div">
@@ -57,18 +52,19 @@
                 <h2 id="question"></h2>
             </div>
             <div class="answers-div">
-                <button id="option1"></button>
-                <button id="option2"></button>
-                <button id="option3"></button>
-                <button id="option4"></button>
+                <button id="option1" class="button-67"></button>
+                <button id="option2" class="button-67"></button>
+                <button id="option3" class="button-67"></button>
+                <button id="option4" class="button-67"></button>
             </div>
             <div class="answer-text-div">
                 <h3 id="answer-text"></h3>
             </div>
         </div>
-        <div class="logout-div">
-            <a href="/"><button id="logout">Logout</button></a>
         </div>
+        
+
+
     </body>
     <script src="js/tokenAssigner.js"></script>
     <script src="js/stressTask.js"></script>
