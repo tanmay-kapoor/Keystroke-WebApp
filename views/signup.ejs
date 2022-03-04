@@ -4,6 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="css/signup.css" />
         <script src="js/tokenChecker.js"></script>
         <title>Signup</title>
     </head>
@@ -13,7 +14,7 @@
             <h4><%= message %></h4>
         </div>
         <% } %>
-        <div>
+        <!-- <div>
             <form action="/signup" method="POST">
                 <div>
                     <label for="username">Username : </label>
@@ -39,6 +40,32 @@
 
                 <div><a href="/login">Login</a></div>
             </form>
+        </div> -->
+
+
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
         </div>
+        <form action="/signup" method="POST">
+            <h3>Signup Here</h3>
+    
+            <label for="username">Username</label>
+            <input type="text"
+                name="username"
+                required
+            >
+    
+            <label for="password">Password</label>
+            <input type="password"
+                name="password"
+                required
+            >
+    
+            <button type="submit">Sign up</button>
+            <div class="social">
+              <div class="go"><a href="/login">Login</a></div>
+            </div>
+        </form>
     </body>
 </html>
