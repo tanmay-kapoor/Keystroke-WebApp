@@ -23,6 +23,4 @@ const routes = require("./routes/routes.js");
 
 app.use("/", routes);
 
-const port =
-    process.env.NODE_ENV === "production" ? process.env.PORT || 80 : 3000;
-app.listen(port, () => console.log(`Server started on port ${port}`));
+app.listen(3000, () => console.log(`Server started on port ${port}`));
