@@ -8,7 +8,10 @@ const verifyToken = async (req, res, next) => {
         res.redirect("/login");
     } else {
         try {
-            const decoded = jwt.verify(req.query.token, "secretkey");
+            const decoded = jwt.verify(
+                req.query.token,
+                process.env.JWT_SECRET_KEY
+            );
             const userid = new ObjectId(decoded.sub);
             const user = await userService.findById(userid);
             if (!user) {
