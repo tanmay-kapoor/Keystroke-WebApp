@@ -26,7 +26,7 @@ const authenticateUser = async (req, res) => {
             if (bcrypt.compareSync(req.body.password, user.password)) {
                 jwt.sign(
                     { sub: user._id.valueOf() },
-                    "secretkey",
+                    process.env.JWT_SECRET_KEY,
                     { expiresIn: "7 days" },
                     (err, token) => {
                         const encodedToken = encodeURIComponent(token);
