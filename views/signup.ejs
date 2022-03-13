@@ -6,13 +6,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="css/signup.css" />
         <script src="js/tokenChecker.js"></script>
+        <script src="https://use.fontawesome.com/84c30ce25b.js"></script>
         <title>Signup</title>
     </head>
     <body>
-        <% if(message) { %>
-        <div>
-            <h4><%= message %></h4>
-        </div>
+        <% if (message) { %>
+            <div style="display:flex; justify-content:center; width: 500px; background-color: rgb(206, 142, 142); margin: 30px auto;">
+                <h4 style="color:rgb(204, 7, 7); font-family: monospace !important; font-size: 20px;">
+                    <%= message %>
+                </h4>
+            </div>
         <% } %>
         
         <div class="background">
@@ -29,10 +32,10 @@
             >
     
             <label for="password">Password</label>
-            <input type="password"
-                name="password"
-                required
-            >
+            <div class="pass-div">
+                <div><input type="password" name="password" required></div>
+                <div><i class="fa fa-eye" aria-hidden="true"></i></div>
+            </div>
     
             <button type="submit">Sign up</button>
             <div class="social">

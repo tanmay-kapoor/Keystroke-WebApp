@@ -124,3 +124,14 @@ button{
 .social i{
   margin-right: 4px;
 }
+.pass-div {
+    display: flex;
+    align-items: center;
+}
+.pass-div input {
+    width: 300px;
+}
+.pass-div i{
+    margin-left: 8px;
+    cursor: pointer;
+}
