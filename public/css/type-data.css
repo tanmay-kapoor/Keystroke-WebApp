@@ -1,4 +1,4 @@
-body{
+body {
     background: #efefef;
 }
 .main {
@@ -10,36 +10,65 @@ body{
     margin: 0;
     background: #efefef;
 }
+.check-list {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+h2 {
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+.check-list li {
+    font-family: "Helvetica Neue", sans-serif;
+    position: relative;
+    list-style-type: none;
+    padding-left: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.check-list li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 5px;
+    height: 11px;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    border-color: #00a8a8;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+}
 button {
-padding: 1.5em 5em;
-background: #efefef;
-border: none;
-border-radius: .5rem;
-color: #444;
-font-size: 1rem;
-font-weight: 700;
-letter-spacing: .2rem;
-text-align: center;
-outline: none;
-cursor: pointer;
-transition: .2s ease-in-out;
-box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
-            -6px -6px 10px rgba(255, 255, 255, .5),
-            6px 6px 8px rgba(255, 255, 255, .075),
-            6px 6px 10px rgba(0, 0, 0, .15);
-margin: 20px;
+    padding: 1.5em 5em;
+    background: #efefef;
+    border: none;
+    border-radius: 0.5rem;
+    color: #444;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+        -6px -6px 10px rgba(255, 255, 255, 0.5),
+        6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+    margin: 20px;
 }
 button:hover {
-box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
-            -2px -2px 4px rgba(255, 255, 255, .4),
-            2px 2px 2px rgba(255, 255, 255, .05),
-            2px 2px 4px rgba(0, 0, 0, .1);
+    box-shadow: -2px -2px 6px rgba(255, 255, 255, 0.6),
+        -2px -2px 4px rgba(255, 255, 255, 0.4),
+        2px 2px 2px rgba(255, 255, 255, 0.05), 2px 2px 4px rgba(0, 0, 0, 0.1);
 }
 button:active {
-box-shadow: inset -2px -2px 6px rgba(255, 255, 255, .7),
-            inset -2px -2px 4px rgba(255, 255, 255, .5),
-            inset 2px 2px 2px rgba(255, 255, 255, .075),
-            inset 2px 2px 4px rgba(0, 0, 0, .15);
+    box-shadow: inset -2px -2px 6px rgba(255, 255, 255, 0.7),
+        inset -2px -2px 4px rgba(255, 255, 255, 0.5),
+        inset 2px 2px 2px rgba(255, 255, 255, 0.075),
+        inset 2px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
 label {
@@ -47,63 +76,63 @@ label {
     color: #444;
     font-size: 1rem;
     font-weight: 700;
-    letter-spacing: .2rem;
+    letter-spacing: 0.2rem;
     text-align: center;
 }
-input[type=range] {
+input[type="range"] {
     height: 38px;
     -webkit-appearance: none;
     margin: 10px 0;
     width: 300px;
     background-color: transparent;
-  }
-  input[type=range]:focus {
+}
+input[type="range"]:focus {
     outline: none;
-  }
-  input[type=range]::-webkit-slider-runnable-track {
+}
+input[type="range"]::-webkit-slider-runnable-track {
     width: 100%;
     height: 14px;
     cursor: pointer;
     animate: 0.2s;
-    box-shadow: 0px 0px 0px #50555C;
-    background: #50555C;
+    box-shadow: 0px 0px 0px #50555c;
+    background: #50555c;
     border-radius: 14px;
     border: 0px solid #000000;
-  }
-  input[type=range]::-webkit-slider-thumb {
+}
+input[type="range"]::-webkit-slider-thumb {
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
     height: 32px;
     width: 19px;
     border-radius: 25px;
-    background: #DBE0D5;
+    background: #dbe0d5;
     cursor: pointer;
     -webkit-appearance: none;
     margin-top: -9px;
-  }
-  input[type=range]:focus::-webkit-slider-runnable-track {
-    background: #50555C;
-  }
-  input[type=range]::-moz-range-track {
+}
+input[type="range"]:focus::-webkit-slider-runnable-track {
+    background: #50555c;
+}
+input[type="range"]::-moz-range-track {
     width: 100%;
     height: 14px;
     cursor: pointer;
     animate: 0.2s;
-    box-shadow: 0px 0px 0px #50555C;
-    background: #50555C;
+    box-shadow: 0px 0px 0px #50555c;
+    background: #50555c;
     border-radius: 14px;
     border: 0px solid #000000;
-  }
-  input[type=range]::-moz-range-thumb {
+}
+input[type="range"]::-moz-range-thumb {
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
     height: 32px;
     width: 19px;
     border-radius: 25px;
-    background: #DBE0D5;
+    background: #dbe0d5;
     cursor: pointer;
-  }
-  input[type=range]::-ms-track {
+}
+input[type="range"]::-ms-track {
     width: 100%;
     height: 14px;
     cursor: pointer;
@@ -111,44 +140,43 @@ input[type=range] {
     background: transparent;
     border-color: transparent;
     color: transparent;
-  }
-  input[type=range]::-ms-fill-lower {
-    background: #50555C;
+}
+input[type="range"]::-ms-fill-lower {
+    background: #50555c;
     border: 0px solid #000000;
     border-radius: 28px;
-    box-shadow: 0px 0px 0px #50555C;
-  }
-  input[type=range]::-ms-fill-upper {
-    background: #50555C;
+    box-shadow: 0px 0px 0px #50555c;
+}
+input[type="range"]::-ms-fill-upper {
+    background: #50555c;
     border: 0px solid #000000;
     border-radius: 28px;
-    box-shadow: 0px 0px 0px #50555C;
-  }
-  input[type=range]::-ms-thumb {
+    box-shadow: 0px 0px 0px #50555c;
+}
+input[type="range"]::-ms-thumb {
     margin-top: 1px;
     box-shadow: 0px 0px 0px #000000;
     border: 0px solid #000000;
     height: 32px;
     width: 19px;
     border-radius: 25px;
-    background: #DBE0D5;
+    background: #dbe0d5;
     cursor: pointer;
-  }
-  input[type=range]:focus::-ms-fill-lower {
-    background: #50555C;
-  }
-  input[type=range]:focus::-ms-fill-upper {
-    background: #50555C;
-  }
+}
+input[type="range"]:focus::-ms-fill-lower {
+    background: #50555c;
+}
+input[type="range"]:focus::-ms-fill-upper {
+    background: #50555c;
+}
 textarea {
     margin-top: 20px;
     outline: none;
     border: none;
-    box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
-            -6px -6px 10px rgba(255, 255, 255, .5),
-            6px 6px 8px rgba(255, 255, 255, .075),
-            6px 6px 10px rgba(0, 0, 0, .15);
-    font-family: 'Courier New', Courier, monospace;
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, 0.7),
+        -6px -6px 10px rgba(255, 255, 255, 0.5),
+        6px 6px 8px rgba(255, 255, 255, 0.075), 6px 6px 10px rgba(0, 0, 0, 0.15);
+    font-family: "Courier New", Courier, monospace;
     font-size: large;
     max-width: 90%;
 }

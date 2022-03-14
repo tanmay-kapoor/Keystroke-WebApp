@@ -9,21 +9,27 @@
         <title>Recording Data</title>
     </head>
     <body>
-    <div class="main">
-        <label for="" id="rangeText">Stress Level: 0</label>
-        <input
-        type="range"
-        min="0"
-        max="3"
-        value="0"
-        id="stressLevel"
-        name="stressLevel"
-        />
+        <div class="main">
+            <label for="" id="rangeText">Stress Level: 0</label>
+            <input
+                type="range"
+                min="0"
+                max="3"
+                value="0"
+                id="stressLevel"
+                name="stressLevel"
+            />
+            <h2>Instructions</h2>
+            <ul class="check-list">
+                <li>Type in English only.</li>
+                <li>
+                    You must type <b>atleast 10 words</b> to submit the text.
+                </li>
+            </ul>
+            <textarea rows="20" cols="150" id="text" name="text"></textarea>
 
-        <textarea rows="25" cols="150" id="text" name="text"></textarea>
-        
-        <button id="submitButton">Submit</button>
-    </div>
+            <button id="submitButton">Submit</button>
+        </div>
     </body>
 
     <script src="js/tokenAssigner.js"></script>
