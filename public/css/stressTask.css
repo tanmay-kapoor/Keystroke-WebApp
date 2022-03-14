@@ -1,17 +1,17 @@
 .check-list {
-  margin: 0;
-  padding-left: 1.2rem;
+    margin: 0;
+    padding-left: 1.2rem;
 }
 
 .check-list li {
-  position: relative;
-  list-style-type: none;
-  padding-left: 2.5rem;
-  margin-bottom: 0.5rem;
+    position: relative;
+    list-style-type: none;
+    padding-left: 2.5rem;
+    margin-bottom: 0.5rem;
 }
 
 .check-list li:before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
     left: 0;
@@ -25,100 +25,106 @@
     transform: rotate(45deg);
 }
 
-
 /* Boilerplate stuff */
 *,
 *:before,
 *:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html {
-  -webkit-font-smoothing: antialiased;
-  font-family: "Helvetica Neue", sans-serif;
-  font-size: 62.5%;
+    -webkit-font-smoothing: antialiased;
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 62.5%;
 }
 
 body {
-  font-size: 1.6rem; /* 18px */
-  background-color: #efefef;
-  color: #324047
+    font-size: 1.6rem; /* 18px */
+    background-color: #efefef;
+    color: #324047;
 }
 
 html,
 body,
 section {
-  /* height: 100%; */
+    /* height: 100%; */
 }
 
 section {
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
 }
 
 div {
-  margin: auto;
+    margin: auto;
 }
 
 /* CSS */
 .quiz-box .button-67 {
-  align-items: center;
-  background: #ffffff;
-  border: 0;
-  border-radius: 8px;
-  box-shadow: -10px -10px 30px 0 #fff,10px 10px 30px 0 #0b073117;
-  box-sizing: border-box;
-  color: #0e0442;
-  cursor: pointer;
-  display: flex;
-  font-family: "Cascadia Code",Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;
-  font-size: 1rem;
-  justify-content: center;
-  line-height: 1.5rem;
-  padding: 15px;
-  position: relative;
-  text-align: left;
-  transition: .2s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: pre;
-  width: max-content;
-  word-break: normal;
-  word-spacing: normal;
+    align-items: center;
+    background: #ffffff;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: -10px -10px 30px 0 #fff, 10px 10px 30px 0 #0b073117;
+    box-sizing: border-box;
+    color: #0e0442;
+    cursor: pointer;
+    display: flex;
+    font-family: "Cascadia Code", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+        monospace;
+    font-size: 1.25rem;
+    justify-content: center;
+    line-height: 1.5rem;
+    padding: 15px;
+    position: relative;
+    text-align: left;
+    transition: 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+    width: max-content;
+    word-break: normal;
+    word-spacing: normal;
 }
 
 .button-67:hover {
-  background: #f8f8ff;
-  box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 #1d0dca17;
+    background: #f8f8ff;
+    box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 #1d0dca17;
+}
+
+.answers-div > .button-67 {
+    padding-left: 45px;
+    padding-right: 45px;
+    font-size: 1.5rem;
 }
 
 @media (min-width: 768px) {
-  .button-67 {
-    padding: 24px;
-  }
+    .button-67 {
+        padding: 24px;
+    }
 }
 
 .game-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-      
+
 .quiz-box {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .answers-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
 .answers-div button {
-  margin: 10px;
+    margin: 10px;
 }

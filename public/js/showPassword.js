@@ -14,3 +14,10 @@ showPasswordButton.addEventListener("click", (e) => {
         icon.classList.add("fa-eye");
     }
 });
+
+document.getElementsByName("password")[0].addEventListener("keypress", (e) => {
+    if (e.key.toLowerCase() === "enter") {
+        e.preventDefault();
+        document.getElementsByTagName("form")[0].submit();
+    }
+});
