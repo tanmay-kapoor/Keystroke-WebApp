@@ -4,25 +4,37 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="css/login.css" />
         <% if (clearStorage) { %>
         <script>
             localStorage.removeItem("token");
         </script>
         <% } %>
-        <script src="js/tokenChecker.js"></script>
         <script src="https://use.fontawesome.com/84c30ce25b.js"></script>
-        <link rel="stylesheet" href="css/login.css" />
+        <script src="js/tokenChecker.js"></script>
+        <script src="js/showPassword.js" defer></script>
         <title>Login</title>
     </head>
     <body>
-        <% if (message) { %>
-        <div style="display:flex; justify-content:center; width: 500px; background-color: rgb(206, 142, 142); margin: 30px auto;">
-            <h4 style="color:rgb(204, 7, 7); font-family: monospace !important; font-size: 20px;">
-                <%= message %>
-            </h4>
+        <% if (message) { if(message==="Account created!") { %>
+        <div
+            style="font-family: monospace !important"
+            class="alert alert-success"
+        >
+            <%= message %>
         </div>
-        <% } %>
-        <div>
+        <% } else { %>
+        <div
+            style="font-family: monospace !important"
+            class="alert alert-danger"
+        >
+            <%= message %>
+        </div>
+        <% }} %>
 
         <div class="background">
             <div class="shape"></div>
@@ -30,22 +42,23 @@
         </div>
         <form action="/login" method="POST">
             <h3>Login Here</h3>
-    
+
             <label for="username">Username</label>
-            <input type="text"
-                name="username"
-                required
-            >
-    
+            <input type="text" name="username" required />
+
             <label for="password">Password</label>
             <div class="pass-div">
-                <div><input type="password" name="password" required></div>
-                <div><i class="fa fa-eye" aria-hidden="true"></i></div>
+                <div><input type="password" name="password" required /></div>
+                <div>
+                    <button id="show-password">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-    
-            <button type="submit">Log In</button>
+
+            <button class="login" type="submit">Log In</button>
             <div class="social">
-              <div class="go"><a href="/signup">Signup</a></div>
+                <div class="go"><a href="/signup">Signup</a></div>
             </div>
         </form>
     </body>

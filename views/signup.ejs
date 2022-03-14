@@ -4,42 +4,50 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        />
         <link rel="stylesheet" href="css/signup.css" />
-        <script src="js/tokenChecker.js"></script>
         <script src="https://use.fontawesome.com/84c30ce25b.js"></script>
+        <script src="js/tokenChecker.js"></script>
+        <script src="js/showPassword.js" defer></script>
         <title>Signup</title>
     </head>
     <body>
         <% if (message) { %>
-            <div style="display:flex; justify-content:center; width: 500px; background-color: rgb(206, 142, 142); margin: 30px auto;">
-                <h4 style="color:rgb(204, 7, 7); font-family: monospace !important; font-size: 20px;">
-                    <%= message %>
-                </h4>
-            </div>
+        <div
+            style="font-family: monospace !important"
+            class="alert alert-danger"
+        >
+            <%= message %>
+        </div>
         <% } %>
-        
+
         <div class="background">
             <div class="shape"></div>
             <div class="shape"></div>
         </div>
         <form action="/signup" method="POST">
             <h3>Signup Here</h3>
-    
+
             <label for="username">Username</label>
-            <input type="text"
-                name="username"
-                required
-            >
-    
+            <input type="text" name="username" required />
+
             <label for="password">Password</label>
             <div class="pass-div">
-                <div><input type="password" name="password" required></div>
-                <div><i class="fa fa-eye" aria-hidden="true"></i></div>
+                <div><input type="password" name="password" required /></div>
+                <div>
+                    <button id="show-password">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-    
-            <button type="submit">Sign up</button>
+
+            <button class="signup" type="submit">Sign up</button>
+
             <div class="social">
-              <div class="go"><a href="/login">Login</a></div>
+                <div class="go"><a href="/login">Login</a></div>
             </div>
         </form>
     </body>
