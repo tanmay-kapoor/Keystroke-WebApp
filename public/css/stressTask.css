@@ -1,9 +1,118 @@
-li {
-    margin-top: 15px;
+.check-list {
+    margin: 0;
+    padding-left: 1.2rem;
 }
+
+.check-list li {
+    position: relative;
+    list-style-type: none;
+    padding-left: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.check-list li:before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -2px;
+    width: 5px;
+    height: 11px;
+    border-width: 0 2px 2px 0;
+    border-style: solid;
+    border-color: #00a8a8;
+    transform-origin: bottom left;
+    transform: rotate(45deg);
+}
+
+/* Boilerplate stuff */
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    font-family: "Helvetica Neue", sans-serif;
+}
+
+section {
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+
+div {
+    margin: auto;
+}
+
+/* CSS */
+.quiz-box .button-67 {
+    align-items: center;
+    background: #ffffff;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: -10px -10px 30px 0 #fff, 10px 10px 30px 0 #0b073117;
+    box-sizing: border-box;
+    color: #0e0442;
+    cursor: pointer;
+    display: flex;
+    font-family: "Cascadia Code", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
+        monospace;
+    font-size: 1.25rem;
+    justify-content: center;
+    line-height: 1.5rem;
+    padding: 15px;
+    position: relative;
+    text-align: left;
+    transition: 0.2s;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+    width: max-content;
+    word-break: normal;
+    word-spacing: normal;
+}
+
+.button-67:hover {
+    background: #f8f8ff;
+    box-shadow: -15px -15px 30px 0 #fff, 15px 15px 30px 0 #1d0dca17;
+}
+
+.answers-div > .button-67 {
+    padding-left: 45px;
+    padding-right: 45px;
+    font-size: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .button-67 {
+        padding: 24px;
+    }
+}
+
 .game-content {
-    display: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.logout-div {
+
+.quiz-box {
     margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.answers-div {
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.answers-div button {
+    margin: 10px;
 }

@@ -9,14 +9,15 @@ const gameContent = [
 const answerText = document.getElementById("answer-text");
 
 document.getElementById("start").addEventListener("click", (e) => {
-    duration = 60 * 2;
-    const endText = document.getElementById("end-text");
-    if (endText) {
-        endText.remove();
+    duration = 120;
+    const endTextDiv = document.getElementsByClassName("end-text-div")[0];
+    if (endTextDiv) {
+        endTextDiv.remove();
     }
+    answerText.innerText = "";
     startDiv.style.display = "none";
     document.getElementsByClassName("game-content")[0].style.display = "block";
-    gameContent.forEach((child) => (child.style.display = "block"));
+    gameContent.forEach((child) => (child.style.display = "flex"));
 
     generateQuestion();
     startTimer();
@@ -101,6 +102,9 @@ function showOnlyScore() {
         if (!div.classList.contains("score-div")) {
             div.style.display = "none";
         } else {
+            const endTextDiv = document.createElement("div");
+            endTextDiv.classList.add("end-text-div");
+
             const endText = document.createElement("h3");
             endText.setAttribute("id", "end-text");
             if (score < 75) {
@@ -109,7 +113,8 @@ function showOnlyScore() {
             } else {
                 endText.innerText = "Task successfully completed!";
             }
-            div.appendChild(endText);
+            endTextDiv.appendChild(endText);
+            div.after(endTextDiv);
         }
     });
 }

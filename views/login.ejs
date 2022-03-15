@@ -4,46 +4,62 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet" href="css/login.css" />
         <% if (clearStorage) { %>
         <script>
             localStorage.removeItem("token");
         </script>
         <% } %>
+        <script src="https://use.fontawesome.com/84c30ce25b.js"></script>
         <script src="js/tokenChecker.js"></script>
+        <script src="js/showPassword.js" defer></script>
         <title>Login</title>
     </head>
     <body>
-        <% if(message) { %>
-        <div>
-            <h4><%= message %></h4>
+        <% if (message) { if(message==="Account created!") { %>
+        <div
+            style="font-family: monospace !important"
+            class="alert alert-success"
+        >
+            <%= message %>
         </div>
-        <% } %>
-        <div>
-            <form action="/login" method="POST">
-                <div>
-                    <label for="username">Username : </label>
-                    <input
-                        type="text"
-                        placeholder="username"
-                        name="username"
-                        required
-                    />
-                </div>
-
-                <div>
-                    <label for="password">Password : </label>
-                    <input
-                        type="password"
-                        placeholder="password"
-                        name="password"
-                        required
-                    />
-                </div>
-
-                <button type="submit">Submit</button>
-
-                <div><a href="/signup">Signup</a></div>
-            </form>
+        <% } else { %>
+        <div
+            style="font-family: monospace !important"
+            class="alert alert-danger"
+        >
+            <%= message %>
         </div>
+        <% }} %>
+
+        <div class="background">
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <form action="/login" method="POST">
+            <h3>Login Here</h3>
+
+            <label for="username">Username</label>
+            <input type="text" name="username" required />
+
+            <label for="password">Password</label>
+            <div class="pass-div">
+                <div><input type="password" name="password" required /></div>
+                <div>
+                    <button id="show-password">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+
+            <button class="login" type="submit">Log In</button>
+            <div class="social">
+                <a href="/signup"><div class="go">Signup</div></a>
+            </div>
+        </form>
     </body>
 </html>

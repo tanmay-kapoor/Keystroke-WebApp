@@ -5,10 +5,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <link rel="stylesheet" href="css/type-data.css" />
         <title>Recording Data</title>
     </head>
     <body>
-        <div>
+        <%- include('partials/navbar') %>
+        <div class="main">
             <label for="" id="rangeText">Stress Level: 0</label>
             <input
                 type="range"
@@ -18,19 +20,20 @@
                 id="stressLevel"
                 name="stressLevel"
             />
-        </div>
+            <h2>Instructions</h2>
+            <ul class="check-list">
+                <li>Type in English only.</li>
+                <li>
+                    You must type <b>atleast 10 words</b> to submit the text.
+                </li>
+            </ul>
+            <textarea rows="20" cols="150" id="text" name="text"></textarea>
 
-        <div>
-            <textarea rows="25" cols="150" id="text" name="text"></textarea>
-            <button id="submitButton">Submit</button>
-        </div>
-
-        <div>
-            <a href="/"><button id="logout">Logout</button></a>
+            <button id="submitButton" class="button-64">Submit</button>
         </div>
     </body>
 
     <script src="js/tokenAssigner.js"></script>
     <script src="js/dataCollection.js"></script>
-    <%- include('partials/logout-footer') %>
+    <%- include('partials/logout-script') %>
 </html>

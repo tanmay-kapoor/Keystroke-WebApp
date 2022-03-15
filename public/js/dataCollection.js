@@ -63,7 +63,7 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
 
         if (
             !confirm(
-                "Is your Stress level correct?\n\nClick Cancel if you like to edit something."
+                "Is your Stress level correct?\nClick Cancel if you would like to edit something."
             )
         ) {
             wastedTime += Date.now() - submitPressedTime; // adding to the time spent in confirming stress level
