@@ -8,6 +8,7 @@
         <title>Select Choice</title>
     </head>
     <body>
+        <%- include('partials/navbar') %>
         <div class="choices">
             <a id="induce-stress"><button class="button-64" role="button"><span class="text">Induce Stress</span></button></a>
             <a id="type-data"><button class="button-64" role="button"><span class="text">Type Data</span></button></a>
@@ -24,5 +25,5 @@
             .setAttribute("href", `/type-data?token=${token}`);
     </script>
 
-    <%- include('partials/logout-footer') %>
+    <%- include('partials/logout-script') %>
 </html>

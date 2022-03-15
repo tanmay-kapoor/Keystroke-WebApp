@@ -9,6 +9,7 @@
         <title>Recording Data</title>
     </head>
     <body>
+        <%- include('partials/navbar') %>
         <div class="main">
             <label for="" id="rangeText">Stress Level: 0</label>
             <input
@@ -28,11 +29,11 @@
             </ul>
             <textarea rows="20" cols="150" id="text" name="text"></textarea>
 
-            <button id="submitButton">Submit</button>
+            <button id="submitButton" class="button-64">Submit</button>
         </div>
     </body>
 
     <script src="js/tokenAssigner.js"></script>
     <script src="js/dataCollection.js"></script>
-    <%- include('partials/logout-footer') %>
+    <%- include('partials/logout-script') %>
 </html>

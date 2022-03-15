@@ -11,6 +11,9 @@ body {
 a {
     text-decoration: none;
 }
+a:hover {
+    text-decoration: none;
+}
 .background {
     width: 430px;
     height: 520px;
