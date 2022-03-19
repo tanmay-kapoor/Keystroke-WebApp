@@ -16,7 +16,7 @@ a:hover {
 }
 .background {
     width: 430px;
-    height: 520px;
+    height: 580px;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -48,7 +48,7 @@ a:hover {
     text-align: center;
 }
 form {
-    height: 520px;
+    height: 630px;
     width: 400px;
     background-color: rgba(255, 255, 255, 0.13);
     position: absolute;

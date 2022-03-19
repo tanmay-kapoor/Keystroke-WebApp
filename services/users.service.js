@@ -1,7 +1,11 @@
 const User = require("../models/users.model.js");
 
-const findByUsername = async (username) => {
-    return await User.findOne({ username });
+const findOne = async (params) => {
+    return await User.findOne(params);
+};
+
+const findByEmailOrUsername = async (email, username) => {
+    return await User.find({ $or: [{ email }, { username }] });
 };
 
 const findById = async (userid) => {
@@ -13,4 +17,14 @@ const addUser = async (newUser) => {
     await user.save();
 };
 
-module.exports = { findByUsername, findById, addUser };
+const updateOne = async (params, updates) => {
+    return await User.updateOne(params, updates);
+};
+
+module.exports = {
+    findOne,
+    findByEmailOrUsername,
+    findById,
+    addUser,
+    updateOne,
+};

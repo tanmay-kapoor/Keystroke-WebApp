@@ -1,12 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const { verifyToken } = require("../helpers/middlewares");
+const { verifyToken, verifyTempToken } = require("../helpers/middlewares");
 
 const {
     getLoginPage,
     authenticateUser,
     getSignupPage,
     addUser,
+    getForgotPasswordPage,
+    sendResetLink,
+    getResetPasswordPage,
+    resetPassword,
     getChoicesPage,
     getStressTaskPage,
     getTypingPage,
@@ -20,6 +24,14 @@ router.post("/login", authenticateUser);
 router.get("/signup", getSignupPage);
 
 router.post("/signup", addUser);
+
+router.get("/forgot-password", getForgotPasswordPage);
+
+router.post("/forgot-password", sendResetLink);
+
+router.get("/reset-password/:id", verifyTempToken, getResetPasswordPage);
+
+router.post("/reset-password/:id", verifyTempToken, resetPassword);
 
 router.get("/", verifyToken, getChoicesPage);
 

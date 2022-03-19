@@ -18,6 +18,7 @@ showPasswordButton.addEventListener("click", (e) => {
 document.getElementsByName("password")[0].addEventListener("keypress", (e) => {
     if (e.key.toLowerCase() === "enter") {
         e.preventDefault();
-        document.getElementsByTagName("form")[0].submit();
+        const button = window.location.href.split("/")[3];
+        document.getElementsByClassName(button)[0].click();
     }
 });

@@ -9,6 +9,20 @@ const entryService = require("../services/entries.service");
 const webLocalStorage = require("../helpers/clearStorage");
 const message = require("../helpers/message");
 
+const nodemailer = require("nodemailer");
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    port: 587,
+    secure: false,
+    auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+    },
+    tls: {
+        rejectUnauthorized: false,
+    },
+});
+
 const getLoginPage = (req, res) => {
     res.render("login", {
         clearStorage: webLocalStorage.getClearStorage(),
@@ -18,21 +32,19 @@ const getLoginPage = (req, res) => {
 
 const authenticateUser = async (req, res) => {
     try {
-        const user = await userService.findByUsername(req.body.username);
+        const user = await userService.findOne({ username: req.body.username });
         if (!user) {
             message.setMessage("Username does not exist");
             res.redirect("/");
         } else {
             if (bcrypt.compareSync(req.body.password, user.password)) {
-                jwt.sign(
+                const token = jwt.sign(
                     { sub: user._id.valueOf() },
                     process.env.JWT_SECRET_KEY,
-                    { expiresIn: "7 days" },
-                    (err, token) => {
-                        const encodedToken = encodeURIComponent(token);
-                        res.redirect(`/?token=${encodedToken}`);
-                    }
+                    { expiresIn: "7 days" }
                 );
+                const encodedToken = encodeURIComponent(token);
+                res.redirect(`/?token=${encodedToken}`);
             } else {
                 message.setMessage("Invalid username/password");
                 res.redirect("/");
@@ -49,14 +61,18 @@ const getSignupPage = (req, res) => {
 
 const addUser = async (req, res) => {
     try {
-        const existingUser = await userService.findByUsername(
+        const existingUsers = await userService.findByEmailOrUsername(
+            req.body.email,
             req.body.username
         );
-        if (existingUser) {
-            message.setMessage("Account with this username already exists");
+        if (existingUsers && existingUsers.length > 0) {
+            message.setMessage(
+                "Account with this email/username already exists"
+            );
             res.redirect("/signup");
         } else {
             const newUser = {
+                email: req.body.email,
                 username: req.body.username,
                 password: bcrypt.hashSync(req.body.password, saltRounds),
             };
@@ -64,6 +80,66 @@ const addUser = async (req, res) => {
             message.setMessage("Account created!");
             res.redirect("/login");
         }
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+const getForgotPasswordPage = (req, res) => {
+    res.render("forgot-password", {
+        clearStorage: webLocalStorage.getClearStorage(),
+        message: message.getMessage(),
+    });
+};
+
+const sendResetLink = async (req, res) => {
+    const existingUser = await userService.findOne({ email: req.body.email });
+    if (existingUser) {
+        const secret = process.env.JWT_SECRET_KEY + existingUser.password;
+        const id = existingUser._id.valueOf();
+        const token = encodeURIComponent(
+            jwt.sign({ sub: id }, secret, {
+                expiresIn: "15m",
+            })
+        );
+        const baseURL = process.env.BASE_URL || "http://localhost:3000";
+
+        const mailOptions = {
+            from: process.env.EMAIL,
+            to: existingUser.email,
+            subject: "Link to reset your password",
+            html: `Dear <b>${existingUser.username},</b><br><br>Please use <a href="${baseURL}/reset-password/${id}?token=${token}">this link</a> to reset your password for <b>Keystroke WebApp.</b><br>Please note this a one time link and will expire in the next <b>15 minutes.</b><br><br>Thank you!`,
+        };
+        transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+                res.json(err);
+            } else {
+                message.setMessage("Check your email for reset link!");
+                res.redirect("/login");
+            }
+        });
+    } else {
+        message.setMessage("Account with specified email doesn't exist");
+        res.redirect("/forgot-password");
+    }
+};
+
+const getResetPasswordPage = (req, res) => {
+    res.render("reset-password", {
+        clearStorage: webLocalStorage.getClearStorage(),
+        message: message.getMessage(),
+    });
+};
+
+const resetPassword = async (req, res) => {
+    const userid = new ObjectId(jwt_decode(req.query.token).sub);
+    try {
+        await userService.updateOne(
+            { _id: userid },
+            { password: bcrypt.hashSync(req.body.password, saltRounds) }
+        );
+        message.setMessage("Password updated!");
+        res.redirect("/login");
     } catch (err) {
         console.log(err);
     }
@@ -98,6 +174,10 @@ module.exports = {
     authenticateUser,
     getSignupPage,
     addUser,
+    getForgotPasswordPage,
+    sendResetLink,
+    getResetPasswordPage,
+    resetPassword,
     getChoicesPage,
     getStressTaskPage,
     getTypingPage,

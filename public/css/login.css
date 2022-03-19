@@ -100,8 +100,16 @@ input {
     outline: none;
     box-shadow: none;
 }
+.forgot-password {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.forgot-password > a:hover {
+    color: orange;
+}
 .login {
-    margin-top: 50px;
+    margin-top: 24px;
     width: 100%;
     background-color: #ffffff;
     color: #080710;
