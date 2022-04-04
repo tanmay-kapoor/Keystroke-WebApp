@@ -108,7 +108,7 @@ const sendResetLink = async (req, res) => {
         const baseURL = process.env.BASE_URL || "http://localhost:3000";
 
         const mailOptions = {
-            from: process.env.EMAIL,
+            from: `Keystroke-WebApp <${process.env.EMAIL}>`,
             to: existingUser.email,
             subject: "Link to reset your password",
             html: `Dear <b>${existingUser.username},</b><br><br>Please use <a href="${baseURL}/reset-password/${id}?token=${token}">this link</a> to reset your password for <b>Keystroke WebApp.</b><br>Please note this a one time link and will expire in the next <b>15 minutes.</b><br><br>Thank you!`,
