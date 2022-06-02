@@ -1,4 +1,5 @@
 const natural = require("natural");
+const FeatureSet = require("natural/lib/natural/classifiers/maxent/FeatureSet");
 const Sentiment = require("sentiment");
 const sentiment = new Sentiment();
 
@@ -40,14 +41,19 @@ function getAllFeatures(body) {
     totalPauseTime = body.totalPauseTime;
     totalPauses = body.totalPauses;
 
-    return {
+    const features = {
         username: body.username,
-        stressLevel: body.stressLevel,
         ...timingFeatures(),
         ...keystrokeFeatures(),
         ...wordFeatures(),
         ...sentenceFeatures(),
     };
+
+    if (body.stressLevel) {
+        return { stressLevel: body.stressLevel, ...features };
+    }
+
+    return features;
 }
 
 function timingFeatures() {

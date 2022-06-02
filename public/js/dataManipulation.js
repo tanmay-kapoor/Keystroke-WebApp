@@ -10,6 +10,10 @@ let startTime,
     totalPauses = 0,
     wastedTime = 0;
 
+let slider, rangeValues, stressLevel;
+const sliderExists =
+    document.getElementById("sliderExists").value === "yes" ? 1 : 0;
+
 document.getElementById("text").addEventListener("keydown", function (e) {
     const key = e.key.toLowerCase();
 
@@ -36,17 +40,20 @@ document.getElementById("text").addEventListener("keydown", function (e) {
     prevKeyTime = Date.now();
 });
 
-const slider = document.getElementById("stressLevel");
-const rangeValues = {
-    0: "Stress Level: 0",
-    1: "Stress Level: 1",
-    2: "Stress Level: 2",
-    3: "Stress Level: 3",
-};
+if (sliderExists) {
+    slider = document.getElementById("stressLevel");
+    rangeValues = {
+        0: "Stress Level: 0",
+        1: "Stress Level: 1",
+        2: "Stress Level: 2",
+        3: "Stress Level: 3",
+    };
 
-slider.addEventListener("change", (e) => {
-    document.getElementById("rangeText").innerText = rangeValues[slider.value];
-});
+    slider.addEventListener("change", (e) => {
+        document.getElementById("rangeText").innerText =
+            rangeValues[slider.value];
+    });
+}
 
 document.getElementById("submitButton").addEventListener("click", (e) => {
     const submitPressedTime = Date.now(); // timestamp when alert is displayed
@@ -59,27 +66,44 @@ document.getElementById("submitButton").addEventListener("click", (e) => {
         wastedTime += Date.now() - submitPressedTime; // adding to the time spent in reading alert
     } else {
         const totalInputTime = submitPressedTime - (wastedTime + startTime);
-        const stressLevel = Number(slider.value);
+        if (sliderExists) {
+            stressLevel = Number(slider.value);
+        }
 
-        if (
-            !confirm(
-                "Is your Stress level correct?\nClick Cancel if you would like to edit something."
-            )
-        ) {
-            wastedTime += Date.now() - submitPressedTime; // adding to the time spent in confirming stress level
+        const data = {
+            text,
+            keystrokes,
+            totalInputTime,
+            totalKeystrokes,
+            totalPauseTime,
+            totalPauses,
+        };
+
+        if (sliderExists) {
+            if (
+                !confirm(
+                    "Is your Stress level correct?\nClick Cancel if you would like to edit something."
+                )
+            ) {
+                wastedTime += Date.now() - submitPressedTime; // adding to the time spent in confirming stress level
+            } else {
+                axios
+                    .post(`/type-data?token=${token}`, { stressLevel, ...data })
+                    .then(() => {
+                        alert("Data recorded!");
+                        window.location = "/";
+                    })
+                    .catch((err) => console.log(err));
+            }
         } else {
             axios
-                .post(`/type-data?token=${token}`, {
-                    stressLevel,
-                    text,
-                    keystrokes,
-                    totalInputTime,
-                    totalKeystrokes,
-                    totalPauseTime,
-                    totalPauses,
-                })
-                .then(() => {
-                    alert("Data recorded!");
+                .post(`/stress-detection?token=${token}`, data)
+                .then((res) => {
+                    const message =
+                        res.data.stressLevel == 1
+                            ? "Looks like you're stressed! Take a break"
+                            : "No stress detected!";
+                    alert(message);
                     window.location = "/";
                 })
                 .catch((err) => console.log(err));

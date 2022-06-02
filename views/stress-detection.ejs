@@ -6,21 +6,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
         <link rel="stylesheet" href="css/type-data.css" />
-        <title>Recording Data</title>
+        <title>Stress Detection</title>
     </head>
     <body>
         <%- include('partials/navbar') %>
-        <input id="sliderExists" type="hidden" value="yes" />
+        <input id="sliderExists" type="hidden" value="no" />
         <div class="main">
-            <label for="" id="rangeText">Stress Level: 0</label>
-            <input
-                type="range"
-                min="0"
-                max="3"
-                value="0"
-                id="stressLevel"
-                name="stressLevel"
-            />
             <h2>Instructions</h2>
             <ul class="check-list">
                 <li>Type in English only.</li>

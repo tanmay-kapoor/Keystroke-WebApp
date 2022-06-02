@@ -173,6 +173,22 @@ const postData = async (req, res) => {
     }
 };
 
+const getStressDetectionPage = (req, res) => {
+    res.render("stress-detection");
+};
+
+const predictStress = async (req, res) => {
+    try {
+        const userid = new ObjectId(jwt_decode(req.query.token).sub);
+        const username = (await userService.findById(userid)).username;
+        const data = { username, ...req.body };
+        const prediction = await entryService.predict(data);
+        res.status(200).json(prediction);
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     getLoginPage,
     authenticateUser,
@@ -186,4 +202,6 @@ module.exports = {
     getStressTaskPage,
     getTypingPage,
     postData,
+    getStressDetectionPage,
+    predictStress,
 };

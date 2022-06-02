@@ -10,8 +10,21 @@
     <body>
         <%- include('partials/navbar') %>
         <div class="choices">
-            <a id="induce-stress"><button class="button-64" role="button"><span class="text">Induce Stress</span></button></a>
-            <a id="type-data"><button class="button-64" role="button"><span class="text">Type Data</span></button></a>
+            <a id="induce-stress"
+                ><button class="button-64" role="button">
+                    <span class="text">Induce Stress</span>
+                </button></a
+            >
+            <a id="type-data"
+                ><button class="button-64" role="button">
+                    <span class="text">Type Data</span>
+                </button></a
+            >
+            <a id="stress-detection"
+                ><button class="button-64" role="button">
+                    <span class="text">Stress Detection</span>
+                </button></a
+            >
         </div>
     </body>
 
@@ -23,6 +36,9 @@
         document
             .getElementById("type-data")
             .setAttribute("href", `/type-data?token=${token}`);
+        document
+            .getElementById("stress-detection")
+            .setAttribute("href", `/stress-detection?token=${token}`);
     </script>
 
     <%- include('partials/logout-script') %>

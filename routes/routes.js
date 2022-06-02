@@ -15,30 +15,24 @@ const {
     getStressTaskPage,
     getTypingPage,
     postData,
+    getStressDetectionPage,
+    predictStress,
 } = require("../controllers/controller.js");
 
 router.get("/login", getLoginPage);
+router.get("/signup", getSignupPage);
+router.get("/forgot-password", getForgotPasswordPage);
+router.get("/reset-password/:id", verifyTempToken, getResetPasswordPage);
+router.get("/", verifyToken, getChoicesPage);
+router.get("/induce-stress", verifyToken, getStressTaskPage);
+router.get("/type-data", verifyToken, getTypingPage);
+router.get("/stress-detection", verifyToken, getStressDetectionPage);
 
 router.post("/login", authenticateUser);
-
-router.get("/signup", getSignupPage);
-
 router.post("/signup", addUser);
-
-router.get("/forgot-password", getForgotPasswordPage);
-
 router.post("/forgot-password", sendResetLink);
-
-router.get("/reset-password/:id", verifyTempToken, getResetPasswordPage);
-
 router.post("/reset-password/:id", verifyTempToken, resetPassword);
-
-router.get("/", verifyToken, getChoicesPage);
-
-router.get("/induce-stress", verifyToken, getStressTaskPage);
-
-router.get("/type-data", verifyToken, getTypingPage);
-
 router.post("/type-data", verifyToken, postData);
+router.post("/stress-detection", verifyToken, predictStress);
 
 module.exports = router;
